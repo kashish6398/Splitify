@@ -1,16 +1,155 @@
-# React + Vite
+# 💸 Splitify – Smart Expense Splitter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and minimal expense splitting web app that helps users divide group expenses effortlessly.
 
-Currently, two official plugins are available:
+Built with a focus on **real-world usability, clean UI, and efficient calculation logic**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ⚡ Quick Split (No Login Required)
 
-## Expanding the ESLint configuration
+* Add expenses instantly
+* Select who paid and who was involved
+* Get real-time balance calculation
+* No signup needed → fast and simple
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+### 📊 Smart Expense Logic
+
+* Supports **multiple payers**
+* Supports **custom participants per expense**
+* Automatically calculates:
+
+  * Who **owes**
+  * Who **gets**
+* Handles real-world messy scenarios (like trips, shared meals, etc.)
+
+---
+
+### 🔁 Individual Settlement System
+
+* Shows exact **who pays whom**
+* No over-simplification (transparent calculations)
+* Net balance optimization between users
+
+---
+
+### 💾 Save Trips (Local Storage)
+
+* Save trips without login
+* Data persists on same device/browser
+* Reload and continue anytime
+
+---
+
+### 📁 My Trips Dashboard
+
+* View all saved trips
+* Open and continue editing
+* Delete trips when not needed
+
+---
+
+## 🧠 How It Works
+
+Each expense contains:
+
+* `amount` → total expense
+* `paidBy` → who paid
+* `participants` → who shared the expense
+
+### Calculation Flow:
+
+1. Split expense among selected participants
+2. Add full amount to payer
+3. Subtract individual share from participants
+4. Compute final balances
+5. Generate settlement (who pays whom)
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:** React (Vite)
+* **Styling:** Tailwind CSS
+* **Animations:** Framer Motion
+* **Storage:** LocalStorage (no backend)
+
+---
+
+## 📸 UI Highlights
+
+* Clean, minimal interface
+* Card-based layout
+* Responsive design (mobile + desktop)
+* Smooth interactions & transitions
+
+---
+
+## 📦 Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/splitify.git
+
+# Navigate to project folder
+cd splitify
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+---
+
+## 🌐 Live Demo
+
+> https://expensesplitify.netlify.app/
+
+---
+
+## 🎯 Future Improvements
+
+* 🔐 Google Authentication
+* ☁️ Cloud storage (MongoDB)
+* 📊 Expense analytics & charts
+* 🌙 Dark mode
+* 📱 PWA support
+
+---
+
+## 💡 Inspiration
+
+Inspired by real-world tools like Splitwise, but designed with a **minimal and intuitive UI approach**.
+
+---
+
+## 👩‍💻 Author
+
+**Kashish Gupta**
+
+* UI/UX Designer & Developer
+* Passionate about building clean and user-friendly products
+
+---
+
+## ⭐ Show Your Support
+
+If you like this project:
+
+* ⭐ Star the repo
+* 🍴 Fork it
+* 💬 Share feedback
+
+---
+
+## 📌 Note
+
+This project is designed as a **real-world problem-solving application**, focusing on logic, UX, and clean design.
+
+---
