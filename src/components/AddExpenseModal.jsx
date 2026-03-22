@@ -6,8 +6,8 @@ import { cn } from '../lib/utils';
 export default function AddExpenseModal({ members, onClose, onAdd }) {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [paidBy, setPaidBy] = useState(members[0]);
-  const [participants, setParticipants] = useState([...members]);
+  const [paidBy, setPaidBy] = useState(members[0]?.id || '');
+  const [participants, setParticipants] = useState(members.map(m => m.id));
 
   // Prevent background scroll
   useEffect(() => {
@@ -17,15 +17,15 @@ export default function AddExpenseModal({ members, onClose, onAdd }) {
     };
   }, []);
 
-  const toggleParticipant = (member) => {
-    if (participants.includes(member)) {
-      setParticipants(participants.filter(m => m !== member));
+  const toggleParticipant = (memberId) => {
+    if (participants.includes(memberId)) {
+      setParticipants(participants.filter(id => id !== memberId));
     } else {
-      setParticipants([...participants, member]);
+      setParticipants([...participants, memberId]);
     }
   };
 
-  const handleSelectAll = () => setParticipants([...members]);
+  const handleSelectAll = () => setParticipants(members.map(m => m.id));
   const handleClearAll = () => setParticipants([]);
 
   const handleSubmit = (e) => {
@@ -33,6 +33,7 @@ export default function AddExpenseModal({ members, onClose, onAdd }) {
     if (!description || !amount || parseFloat(amount) <= 0 || participants.length === 0) return;
     
     onAdd({
+      id: crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(),
       description,
       amount: parseFloat(amount),
       paidBy,
@@ -106,7 +107,7 @@ export default function AddExpenseModal({ members, onClose, onAdd }) {
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white transition-all outline-none text-gray-900 appearance-none font-semibold cursor-pointer"
             >
               {members.map(m => (
-                <option key={m} value={m}>{m}</option>
+                <option key={m.id} value={m.id}>{m.name}</option>
               ))}
             </select>
           </div>
@@ -135,12 +136,12 @@ export default function AddExpenseModal({ members, onClose, onAdd }) {
             <div className="max-h-[160px] overflow-y-auto pr-2 custom-scrollbar">
               <div className="flex flex-wrap gap-2 pb-2">
                 {members.map((member) => {
-                  const isSelected = participants.includes(member);
+                  const isSelected = participants.includes(member.id);
                   return (
                     <button
-                      key={member}
+                      key={member.id}
                       type="button"
-                      onClick={() => toggleParticipant(member)}
+                      onClick={() => toggleParticipant(member.id)}
                       className={cn(
                         "flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-semibold transition-all select-none border active:scale-[0.98]",
                         isSelected 
@@ -148,7 +149,7 @@ export default function AddExpenseModal({ members, onClose, onAdd }) {
                           : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50 hover:border-gray-300"
                       )}
                     >
-                      {member}
+                      {member.name}
                       {isSelected && <Check size={14} strokeWidth={3} className="text-white" />}
                     </button>
                   )

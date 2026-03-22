@@ -3,6 +3,17 @@ import { useState, useEffect } from "react";
 const STORAGE_KEY = "splitify_trips";
 const ACTIVE_TRIP_KEY = "splitify_active_trip";
 
+const sanitizeExpenses = (expenses) => {
+  if (!Array.isArray(expenses)) return [];
+  return expenses.map(exp => ({
+    ...exp,
+    participants: Array.isArray(exp.participants) 
+      ? exp.participants.map(p => typeof p === 'object' && p !== null ? p.id : p).filter(Boolean)
+      : [],
+    paidBy: typeof exp.paidBy === 'object' && exp.paidBy !== null ? exp.paidBy.id : exp.paidBy
+  }));
+};
+
 export function useTripStorage() {
   const [trips, setTrips] = useState(() => {
     try {
@@ -35,7 +46,7 @@ export function useTripStorage() {
       if (savedActive) {
         const parsed = JSON.parse(savedActive);
         setMembers(parsed.members || []);
-        setExpenses(parsed.expenses || []);
+        setExpenses(sanitizeExpenses(parsed.expenses));
         setTripName(parsed.name || "");
         setActiveTripId(parsed.id || null);
       }
@@ -83,7 +94,7 @@ export function useTripStorage() {
     const trip = trips.find(t => t.id === id);
     if (trip) {
       setMembers(trip.members || []);
-      setExpenses(trip.expenses || []);
+      setExpenses(sanitizeExpenses(trip.expenses));
       setTripName(trip.name || "");
       setActiveTripId(trip.id);
     }

@@ -79,7 +79,7 @@ export default function ExpenseManager({ members, expenses, setExpenses, onSplit
                       <div className="flex-1 min-w-0">
                         <p className="text-base font-bold text-gray-900 truncate tracking-tight">{expense.description}</p>
                         <p className="text-xs font-medium text-gray-500 mt-0.5 truncate">
-                          <span className="text-gray-700">{payer}</span> paid for {expense.participants.length} people
+                          <span className="text-gray-700">{payer}</span> paid for {expense.participants?.length || 0} people
                         </p>
                       </div>
                     </div>

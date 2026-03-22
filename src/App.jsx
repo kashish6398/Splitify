@@ -78,7 +78,7 @@ export default function App() {
   };
 
   const balances = showResults ? calculateBalances(expenses, members) : {};
-  const transactions = showResults ? settleBalancesDirect(expenses) : [];
+  const transactions = showResults ? settleBalancesDirect(expenses, members) : [];
 
   const HomeWizard = (
     <main className="flex-1 w-full max-w-2xl mx-auto relative px-4 py-10 sm:py-14">
